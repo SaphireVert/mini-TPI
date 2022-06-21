@@ -1,7 +1,6 @@
-FROM ubuntu
-COPY --from=node:latest /usr/local/bin/node /usr/local/bin/node
-# ENV PATH="/usr/local/bin/node:${PATH}"
+FROM node
+RUN corepack enable
 RUN mkdir -p /srv/app
-WORKDIR /srv/app
-ENTRYPOINT [ "node", "toto.js" ]
+WORKDIR /srv/app/kata-manga-app
+ENTRYPOINT [ "yarn", "start" ]
 
