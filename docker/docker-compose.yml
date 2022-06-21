@@ -15,6 +15,11 @@ services:
       - "db"
     ports:
     - 3004:3004
+    environment:
+      - DB_HOST=db
+      - DB_PASSWD=root
+      - DB_USER=root
+      - DB_NAME=KataManga
     # depends_on:
     #   db:
     #   condition: service_healthy
