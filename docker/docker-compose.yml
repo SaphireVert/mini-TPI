@@ -1,0 +1,33 @@
+version: "3.8"
+services:
+  react-app:
+    build: ./react-app
+    volumes:
+      - ../kata-manga-app:/srv/kata-manga-app
+    ports:
+    - 3000:3000
+    
+  api:
+    build: ./api
+    volumes:
+      - ../api:/srv/api
+    links:
+      - "db"
+    ports:
+    - 3004:3004
+    # depends_on:
+    #   db:
+    #   condition: service_healthy
+  db:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ../docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+
+  adminer:
+    image: adminer
+    ports:
+      - 8086:8080
+
+    
