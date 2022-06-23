@@ -13,13 +13,10 @@ const config = {
 const connection = mysql.createConnection(config);
 
 var app = express();
+app.use(express.json());
 app.listen(3004, () => {
-    app.get("/mangas", (req, res, next) => {
-      connection.query(
-        'SELECT * FROM `manga`',
-        function(err, results, fields) {
-          res.json(results);
-        }
-      );
-    });
+    require('./routes/manga')(app, connection)
+    require('./routes/author')(app, connection)
+    require('./routes/genre')(app, connection)
+    require('./routes/magazine')(app, connection)
 });
