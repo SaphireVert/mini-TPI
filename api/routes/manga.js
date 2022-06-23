@@ -28,34 +28,36 @@ module.exports = (app, connection) => {
     app.post("/manga", (req, res, next) => {
         console.log("post")
         console.log(req.body)
+        var json = req.body
         connection.query(
-          'INSERT INTO manga VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
-          [7, "title", "finished", "1994-12-05", "1994-12-05", "lorem ipsum", "url", 7, 5],
+          'INSERT INTO manga VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+          [json.rank, json.title, json.status, json.start_date, json.end_date, json.synopsis, json.image_url, json.num_chapters, json.num_volumes],
           function(err, results, fields) {
-            res.send(["err", "fdehjidifhj"]);    
+            res.send(req.body);    
           }
         );
     });
 
-    app.put("/manga/:id", (req, res, next) => {
+    app.put("/manga", (req, res, next) => {
         console.log(req.body)
+        var json = req.body
         connection.query(
-        'UPDATE manga SET rank=?, WHERE id=?',
+          'UPDATE `manga` SET `id`=?, `rank`=?, `title`=?, `status`=?, `start_date`=?, `end_date`=?, `synopsis`=?, `image_url`=?, `num_chapters`=?, `num_volumes`=? WHERE `id`=?;',
+          [json.id, json.rank, json.title, json.status, json.start_date, json.end_date, json.synopsis, json.image_url, json.num_chapters, json.num_volumes, json.id],
           function(err, results, fields) {
-              
-          }
+            res.send(req.body); 
+          } 
         );
-        res.send(req.body); 
     });
 
     app.delete("/manga/:id", (req, res, next) => {
         console.log(req.body)
         connection.query(
-        'DELETE FROM manga WHERE id=?',
-        [req.params.id],
-        function(err, results, fields) {
-             
-        }
+          'DELETE FROM manga WHERE id=?',
+          [req.params.id],
+          function(err, results, fields) {
+              
+          }
         );
         res.send(req.body); 
     });
