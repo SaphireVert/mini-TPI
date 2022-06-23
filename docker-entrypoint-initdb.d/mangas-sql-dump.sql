@@ -12,7 +12,7 @@ SET SESSION sql_mode = '';
 --
 DROP TABLE IF EXISTS `author`;
 CREATE TABLE `author` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `first_name` varchar(50) NOT NULL,
   `last_name` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
@@ -34,7 +34,7 @@ CREATE TABLE `classify` (
 --
 DROP TABLE IF EXISTS `genre`;
 CREATE TABLE `genre` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(20) NOT NULL,
   `description` mediumtext DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -45,7 +45,7 @@ CREATE TABLE `genre` (
 --
 DROP TABLE IF EXISTS `magazine`;
 CREATE TABLE `magazine` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
@@ -57,7 +57,7 @@ CREATE TABLE `magazine` (
 --
 DROP TABLE IF EXISTS `manga`;
 CREATE TABLE `manga` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `rank` int(3) DEFAULT NULL,
   `title` varchar(255) NOT NULL,
   `status` varchar(20) DEFAULT NULL,
