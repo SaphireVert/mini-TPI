@@ -2,9 +2,35 @@ module.exports = (app, connection) => {
     /**
      * @swagger
      * /manga/{id}:
-     *   get:
-     *     summary: Retrieve a simgle manga with the rank id
-     *     description: Retrieve a manga with the specified rank id
+     *    get:
+     *      tags:
+     *      - "manga"
+     *      summary: "Retrieve a simgle manga with the rank id"
+     *      description: "Retrieve a manga with the specified rank id"
+     *      operationId: "deleteManga"
+     *      produces:
+     *      - "application/xml"
+     *      - "application/json"
+     *      parameters:
+     *      - name: "id"
+     *        in: "path"
+     *        description: "ID of pet to return"
+     *        required: true
+     *        type: "integer"
+     *        format: "int64" 
+     *      responses:
+     *        "200":
+     *          description: "successful operation"
+     *          schema:
+     *            $ref: "#/definitions/Manga"
+     *        "400":
+     *          description: "Invalid ID supplied"
+     *        "404":
+     *          description: "Pet not found"
+     *      security:
+     *      - mangastore_auth:
+     *        - "write:mangas"
+     *        - "read:mangas"
     */
     app.get("/manga/:id", (req, res, next) => {
       var arr = []
@@ -38,7 +64,7 @@ module.exports = (app, connection) => {
      *    post:
      *      tags:
      *      - "manga"
-     *      summary: "Add a new manga to the store"
+     *      summary: "Add a new manga"
      *      description: ""
      *      operationId: "addManga"
      *      consumes:
@@ -75,6 +101,36 @@ module.exports = (app, connection) => {
         );
     });
 
+    /**
+     * @swagger
+     * /manga:
+     *    put:
+     *      tags:
+     *      - "manga"
+     *      summary: "Modify a manga"
+     *      description: ""
+     *      operationId: "addManga"
+     *      consumes:
+     *      - "application/json"
+     *      - "application/xml"
+     *      produces:
+     *      - "application/xml"
+     *      - "application/json"
+     *      parameters:
+     *      - in: "body"
+     *        name: "body"
+     *        description: "Manga object that needs to be added to the store"
+     *        required: true
+     *        schema:
+     *          $ref: "#/definitions/Manga"
+     *      responses:
+     *        "405":
+     *          description: "Invalid input"
+     *      security:
+     *      - mangastore_auth:
+     *        - "write:mangas"
+     *        - "read:mangas"
+    */
     app.put("/manga", (req, res, next) => {
         console.log(req.body)
         var json = req.body
@@ -86,7 +142,39 @@ module.exports = (app, connection) => {
           } 
         );
     });
-
+    /**
+     * @swagger
+     * /manga/{id}:
+     *    delete:
+     *      tags:
+     *      - "manga"
+     *      summary: "Add a new manga to the store"
+     *      description: ""
+     *      operationId: "deleteManga"
+     *      produces:
+     *      - "application/xml"
+     *      - "application/json"
+     *      parameters:
+     *      - name: "id"
+     *        in: "path"
+     *        description: "ID of pet to return"
+     *        required: true
+     *        type: "integer"
+     *        format: "int64" 
+     *      responses:
+     *        "200":
+     *          description: "successful operation"
+     *          schema:
+     *            $ref: "#/definitions/Manga"
+     *        "400":
+     *          description: "Invalid ID supplied"
+     *        "404":
+     *          description: "Pet not found"
+     *      security:
+     *      - mangastore_auth:
+     *        - "write:mangas"
+     *        - "read:mangas"
+    */
     app.delete("/manga/:id", (req, res, next) => {
         console.log(req.body)
         connection.query(
