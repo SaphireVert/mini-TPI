@@ -1,4 +1,11 @@
 module.exports = (app, connection) => {
+    /**
+     * @swagger
+     * /manga/:id:
+     *   get:
+     *     summary: Retrieve a simgle manga with the rank id
+     *     description: Retrieve a manga with the specified rank id
+    */
     app.get("/manga/:id", (req, res, next) => {
       var arr = []
       connection.query( 
