@@ -38,6 +38,36 @@ const swaggerDefinition = {
       description: 'Development server',
     },
   ],
+  definitions: {
+        Manga:{
+          type: "object",
+          required:
+          - "title",
+          properties:{
+            rank:
+              {type: "integer",
+              example: 99},
+            title:
+              {type: "string",
+              example: "doggie"},
+            status:{
+              type: "string",
+              example: "finished"},
+            start_date:{
+              type: "string",
+              example: "1994-12-05"},
+            end_date:{
+              type: "string",
+              example: "1994-12-05"},
+            synopsis:{
+              type: "string"},
+            image_url:{
+              type: "string"},
+            num_chapters:{
+              type: "integer"},
+            num_volumes:{
+              type: "integer"}}}
+  }
 };
 
 const options = {

@@ -1,7 +1,7 @@
 module.exports = (app, connection) => {
     /**
      * @swagger
-     * /manga/:id:
+     * /manga/{id}:
      *   get:
      *     summary: Retrieve a simgle manga with the rank id
      *     description: Retrieve a manga with the specified rank id
@@ -32,6 +32,36 @@ module.exports = (app, connection) => {
       );
     });
 
+    /**
+     * @swagger
+     * /manga:
+     *    post:
+     *      tags:
+     *      - "manga"
+     *      summary: "Add a new manga to the store"
+     *      description: ""
+     *      operationId: "addManga"
+     *      consumes:
+     *      - "application/json"
+     *      - "application/xml"
+     *      produces:
+     *      - "application/xml"
+     *      - "application/json"
+     *      parameters:
+     *      - in: "body"
+     *        name: "body"
+     *        description: "Manga object that needs to be added to the store"
+     *        required: true
+     *        schema:
+     *          $ref: "#/definitions/Manga"
+     *      responses:
+     *        "405":
+     *          description: "Invalid input"
+     *      security:
+     *      - mangastore_auth:
+     *        - "write:mangas"
+     *        - "read:mangas"
+    */
     app.post("/manga", (req, res, next) => {
         console.log("post")
         console.log(req.body)
