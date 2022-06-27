@@ -22,7 +22,8 @@ export default class Mangas extends React.Component {
     rows: null,
     loading: true,
     data: null,
-    params: undefined
+    params: undefined,
+    checked: undefined
   }
 
   async setRows () {
@@ -72,6 +73,25 @@ export default class Mangas extends React.Component {
       this.setState({ data: data, loading: false });
   }
 
+  filterRows(){
+    console.log(this.state.checked);
+    let selector = this.state.checked
+    
+    return this.state.data.filter((element) => {
+      let filter = this.state.params
+      if (!filter) return true;
+      let title = element.title.toLowerCase();
+      console.log(element);
+      return title.includes(filter.toLowerCase())
+      // console.log(element.title);
+    })
+  }
+
+    onChangeValue = (event) => {
+      console.log(event.target.id);
+      this.setState({checked: event.target.id})
+  }
+
   render(){
     return (
       <Container>
@@ -93,17 +113,27 @@ export default class Mangas extends React.Component {
                     }
                   }}
                 />
+                <div onChange={this.onChangeValue}>
+                  <input type="radio" name="tous" id="tous"/>
+                  <label for="tous">Tous les champs:</label>
+                  <input type="radio" name="tous" id="titre"/>
+                  <label for="tous">Titre</label>
+                  <input type="radio" name="tous" id="auteur" />
+                  <label for="tous">Auteur</label>
+                  <input type="radio" name="tous" id="genre" />
+                  <label for="tous">Genre</label>
+                  <input type="radio" name="tous" id="magasine" />
+                  <label for="tous">Magasine</label>
+                </div>
+
+                {/* <div>{this.which  IsChecked()}</div>   */}
+                
+
                 <DataGrid
-                  rows={this.state.data.filter((element) => {
-                    let filter = this.state.params
-                    if (!filter) return true;
-                    let title = element.title.toLowerCase();
-                    // console.log(element.title);
-                    return title.includes(filter.toLowerCase());
-                  })}
+                  rows={this.filterRows()}
                   columns={this.state.columns}
-                  pageSize={10}
-                  rowsPerPageOptions={[10, 15, 20, 25]}
+                  // pageSize={10}
+                  rowsPerPageOptions={[10, 15, 20, 25, 100]}
                   // checkboxSelection
                 />
               </div>
