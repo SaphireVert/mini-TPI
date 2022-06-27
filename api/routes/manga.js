@@ -35,7 +35,7 @@ module.exports = (app, connection) => {
     app.get("/manga/:id", (req, res, next) => {
       var arr = []
       connection.query( 
-        'SELECT manga.rank, manga.title, manga.start_date, manga.status FROM manga ' +
+        'SELECT manga.id, manga.rank, manga.title, manga.start_date, manga.status FROM manga ' +
         'WHERE manga.rank = ? ',
         [req.params.id],
         function(err, results, fields) {

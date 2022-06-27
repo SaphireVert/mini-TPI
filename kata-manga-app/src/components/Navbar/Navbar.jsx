@@ -10,6 +10,7 @@ const Container = styled.div`
     border-style: solid;
     border-width: 0.2vh;
     border-color: black;
+    /* position: fixed; */
 `
 const Wrapper = styled.div`
   display: flex;
@@ -50,7 +51,7 @@ function Navbar() {
         <Links>
           <Link to="/home">Home</Link>
           <Link to="/mangas">Mangas</Link>
-          <Link to="/API">API</Link>
+          <a href="http://localhost:3004/api-docs">API</a>
         </Links>
         <Empty></Empty>
       </Wrapper>

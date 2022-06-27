@@ -2,6 +2,8 @@ import './App.css';
 import { Route, Routes } from "react-router-dom";
 import Layout from './components/Layout/Layout';
 import Home from './pages/Home/Home'
+import Mangas from './pages/Mangas/Mangas'
+import Swagger from './pages/Swagger/Swagger'
 
 function App() {
   return (
@@ -11,9 +13,9 @@ function App() {
           <Route path="/">
             <Route index element={<Home/>}/>
             <Route path="home" element={<Home/>}/>
-            <Route path="mangas" element={<>mangas</>}></Route>
+            <Route path="mangas" element={<Mangas></Mangas>}/>
             <Route path="mangas/:id" element={<>manga/:id</>}/>
-            <Route path="api" element={<>api</>}/>
+            {/* <Route path="api" element={<Swagger/>}/> */}
           </Route>
         </Routes>
       </Layout>

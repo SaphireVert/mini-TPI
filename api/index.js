@@ -3,7 +3,7 @@ var express = require("express"),
     swaggerJsdoc = require("swagger-jsdoc"),
     swaggerUi = require("swagger-ui-express");
     const mysql = require('mysql2');
-
+var cors = require('cors');
   
 
 const config = {
@@ -80,6 +80,7 @@ const specs = swaggerJsdoc(options);
 
 
 var app = express();
+app.use(cors());
 
 app.use(express.json());
 app.listen(3004, () => {
