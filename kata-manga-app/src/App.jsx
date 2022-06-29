@@ -3,7 +3,6 @@ import { Route, Routes } from "react-router-dom";
 import Layout from './components/Layout/Layout';
 import Home from './pages/Home/Home'
 import Mangas from './pages/Mangas/Mangas'
-import Swagger from './pages/Swagger/Swagger'
 
 function App() {
   return (
